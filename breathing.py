@@ -34,7 +34,12 @@ with tab1:
     st.subheader("スパイロメトリー（肺機能）")
     st.info("大きく息を吸ってから、マイクアイコンを押して **一気に長く（約6秒間）** 息を吐ききってください。終わったらもう一度アイコンを押して停止します。")
     
-    audio_bytes_1 = audio_recorder(text="クリックして録音/停止", key="spiro")
+    # 【変更箇所】無音で勝手に切れないようにpause_thresholdを追加
+    audio_bytes_1 = audio_recorder(
+        text="タップで開始 🔴 / もう一度タップで停止 ⬛", 
+        pause_threshold=30.0, 
+        key="spiro"
+    )
     
     if audio_bytes_1:
         st.audio(audio_bytes_1, format="audio/wav")
@@ -76,9 +81,14 @@ with tab1:
 # ==========================================
 with tab2:
     st.subheader("咳の強さ（気道防御力）")
-    st.info("お腹に力を入れて、録音中に **「ゴホン！」と1回だけ** 強い咳をしてください。")
+    st.info("お腹に力を入れて、録音中に **「ゴホン！」と1回だけ** 強い咳をしてください。終わったら停止を押します。")
     
-    audio_bytes_2 = audio_recorder(text="クリックして録音/停止", key="cough")
+    # 【変更箇所】無音で勝手に切れないようにpause_thresholdを追加
+    audio_bytes_2 = audio_recorder(
+        text="タップで開始 🔴 / もう一度タップで停止 ⬛", 
+        pause_threshold=30.0, 
+        key="cough"
+    )
     
     if audio_bytes_2:
         st.audio(audio_bytes_2, format="audio/wav")
@@ -110,9 +120,14 @@ with tab2:
 # ==========================================
 with tab3:
     st.subheader("発声持続時間（声帯閉鎖力）")
-    st.info("大きく息を吸ってから、録音中に **「アーーー」とできるだけ長く** 声を出してください。")
+    st.info("大きく息を吸ってから、録音中に **「アーーー」とできるだけ長く** 声を出してください。限界が来たら停止を押します。")
     
-    audio_bytes_3 = audio_recorder(text="クリックして録音/停止", key="mpt")
+    # 【変更箇所】無音で勝手に切れないようにpause_thresholdを追加
+    audio_bytes_3 = audio_recorder(
+        text="タップで開始 🔴 / もう一度タップで停止 ⬛", 
+        pause_threshold=30.0, 
+        key="mpt"
+    )
     
     if audio_bytes_3:
         st.audio(audio_bytes_3, format="audio/wav")
